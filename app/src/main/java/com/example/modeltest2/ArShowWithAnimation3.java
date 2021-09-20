@@ -59,6 +59,7 @@ import java.util.Set;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+// Test commit
 public class ArShowWithAnimation3 extends AppCompatActivity implements
         FragmentOnAttachListener,
         BaseArFragment.OnSessionConfigurationListener,
