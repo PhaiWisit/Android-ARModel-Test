@@ -1,0 +1,27 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Project exclude paths
+/sceneform_animation/build/
+/sceneform_animation/build/intermediates/javac/debug/classes/
+/sceneform_core_forscan/build/
+/sceneform_core_forscan/build/intermediates/javac/debug/classes/
+/sceneform_ux_forscan/build/
+/sceneform_ux_forscan/build/intermediates/javac/debug/classes/
+/sceneformux_animation/build/
+/sceneformux_animation/build/intermediates/javac/debug/classes/
+/zxing-qr-scanner/build/
+/zxing-qr-scanner/build/intermediates/javac/debug/classes/

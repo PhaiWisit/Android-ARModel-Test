@@ -1,0 +1,9 @@
+include ':zxing-qr-scanner'
+include ':sceneform_ux_forscan'
+include ':sceneform_animation'
+include ':sceneformux_animation'
+include ':sceneform_core_forscan'
+include ':sceneform_forscan'
+include ':ar_detector'
+include ':app'
+rootProject.name = "ModelTest2"
