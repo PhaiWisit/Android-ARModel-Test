@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ModelTest2">
-        <activity android:name=".ArShowWithAnimation3"></activity>
+        <activity android:name=".ArShowWithAnimation4"></activity>
+        <activity android:name=".ArShowWithAnimation3" />
         <activity android:name=".ArShowWithAnimation2" />
         <activity android:name=".ArShowWithAnimation" />
         <activity android:name=".ArShowWithoutAnimation" />

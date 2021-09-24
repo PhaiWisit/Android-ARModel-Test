@@ -163,7 +163,7 @@ public class ArShowWithAnimation2 extends AppCompatActivity implements
 //                        WeakReference<ArShowWithAnimation2> weakActivity = new WeakReference<>(this);
                         WeakReference<ArShowWithAnimation2> finalWeakActivity = weakActivity;
                         ModelRenderable.builder()
-                                .setSource(this, Uri.parse("models/a01-old.glb"))
+                                .setSource(this, Uri.parse("models/a03.glb"))
                                 .setIsFilamentGltf(true)
                                 .build()
                                 .thenAccept(rabbitModel -> {

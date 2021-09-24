@@ -82,10 +82,20 @@ public class ArShowWithAnimation3 extends AppCompatActivity implements
     private boolean isDetected1 = false;
     private boolean isDetected2 = false;
 
-    private boolean arIsShow = false;
+    private boolean isShowModel = false;
     private String currentImageName = "";
-    Frame frame2;
+//    Frame frame2;
     AnchorNode anchorNode;
+    TransformableNode modelNode;
+
+    /**
+     * This class for show AR models with animation.
+     * It can show models in each page but can't show more than 3 page.
+     * When scan more than 3 page. The models animation was wrong.
+     * Test with book 1 page rabbit, horse, monkey and butterfly.
+     * **/
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,13 +127,24 @@ public class ArShowWithAnimation3 extends AppCompatActivity implements
                 for (Node node : children) {
                     if (node instanceof AnchorNode) {
                         if (((AnchorNode) node).getAnchor() != null) {
+                            arFragment.getArSceneView().getScene().removeChild(node);
                             ((AnchorNode) node).getAnchor().detach();
+                            node.setParent(null);
                         }
                     }
                     if (!(node instanceof Camera) && !(node instanceof Sun)) {
                         node.setParent(null);
                     }
                 }
+
+//                page1Detected = false;
+//                page2Detected = false;
+//                page3Detected = false;
+//                page4Detected = false;
+
+//                removeAnchorNode(anchorNode);
+
+
 
 
 
@@ -181,17 +202,18 @@ public class ArShowWithAnimation3 extends AppCompatActivity implements
         if (page1Detected && page2Detected && page3Detected && page4Detected)
             return;
 
-//        Frame frame = arFragment.getArSceneView().getArFrame();
-        frame2 = arFragment.getArSceneView().getArFrame();
+        Frame frame = arFragment.getArSceneView().getArFrame();
+//        frame2 = arFragment.getArSceneView().getArFrame();
         try {
             // This is collection of all images from our AugmentedImageDatabase that are currently detected by ARCore in this session
-            Collection<AugmentedImage> augmentedImageCollection = frame2.getUpdatedTrackables(AugmentedImage.class);
+            Collection<AugmentedImage> augmentedImageCollection = frame.getUpdatedTrackables(AugmentedImage.class);
             WeakReference<ArShowWithAnimation3> weakActivity = new WeakReference<>(this);
 
             for (AugmentedImage image : augmentedImageCollection){
+
                 if (image.getTrackingState() == TrackingState.TRACKING) {
                     arFragment.getPlaneDiscoveryController().hide();
-                    weakActivity = new WeakReference<>(this);
+//                    weakActivity = new WeakReference<>(this);
 
                     String imageName = image.getName();
 
@@ -204,53 +226,69 @@ public class ArShowWithAnimation3 extends AppCompatActivity implements
                         animator.animator.updateBoneMatrices();
                     }
 
-
-                    if (!imageName.equals(currentImageName) && !page1Detected) {
+                    if (!page1Detected && imageName.equals("a03")){
                         page1Detected = true;
-                        frame2 = arFragment.getArSceneView().getArFrame();
-                            Toast.makeText(this, "page1 tag detected", Toast.LENGTH_LONG).show();
-//                            RemoveModels(weakActivity,image);
-//                            removeAnchorNode(anchorNode);
-                        anchorNode = null;
-
+                        removeAnchorNode(anchorNode);
                         ShowModels(weakActivity,image);
-                            currentImageName = imageName;
                     }
-                    if (!imageName.equals(currentImageName) && !page2Detected) {
-
+                    if (!page2Detected && imageName.equals("a04")){
                         page2Detected = true;
-                        Toast.makeText(this, "page2 tag detected", Toast.LENGTH_LONG).show();
-//                        RemoveModels(weakActivity,image);
-//                        removeAnchorNode(anchorNode);
-                        anchorNode = null;
+                        removeAnchorNode(anchorNode);
                         ShowModels(weakActivity,image);
-                        currentImageName = imageName;
                     }
-
-                    if (!imageName.equals(currentImageName) && !page3Detected) {
-
+                    if (!page3Detected && imageName.equals("a05")){
                         page3Detected = true;
-                        Toast.makeText(this, "page3 tag detected", Toast.LENGTH_LONG).show();
-//                        RemoveModels(weakActivity,image);
-//                        removeAnchorNode(anchorNode);
-                        anchorNode = null;
+//                        weakActivity.clear();
+//                        weakActivity = new WeakReference<>(this);
+                        removeAnchorNode(anchorNode);
                         ShowModels(weakActivity,image);
-                        currentImageName = imageName;
                     }
-
-                    if (!imageName.equals(currentImageName) && !page4Detected) {
-
+                    if (!page4Detected && imageName.equals("a06")){
                         page4Detected = true;
-                        Toast.makeText(this, "page4 tag detected", Toast.LENGTH_LONG).show();
-//                        RemoveModels(weakActivity,image);
-//                        removeAnchorNode(anchorNode);
-                        anchorNode = null;
+//                        weakActivity.clear();
+//                        weakActivity = new WeakReference<>(this);
+                        removeAnchorNode(anchorNode);
                         ShowModels(weakActivity,image);
-                        currentImageName = imageName;
                     }
+
+
+//                    if (!imageName.equals(currentImageName) && !page1Detected) {
+//                        page1Detected = true;
+//                        currentImageName = imageName;
+//                        ShowModels(weakActivity,image);
+//                    }
+//                    if (!imageName.equals(currentImageName) && !page2Detected) {
+//
+//                        page2Detected = true;
+//                        ShowModels(weakActivity,image);
+//                        currentImageName = imageName;
+//                    }
+//
+//                    if (!imageName.equals(currentImageName) && !page3Detected) {
+//                        page3Detected = true;
+//                        ShowModels(weakActivity,image);
+//                        currentImageName = imageName;
+//                    }
+//
+//                    if (!imageName.equals(currentImageName) && !page4Detected) {
+//                        page4Detected = true;
+//                        ShowModels(weakActivity,image);
+//                        currentImageName = imageName;
+//                    }
 
 
                 }
+
+//                if (image.getTrackingState() == TrackingState.PAUSED){
+//                    Toast.makeText(getApplicationContext(),"State Paused ",Toast.LENGTH_SHORT).show();
+////                    page1Detected = false;
+////                    page2Detected = false;
+////                    page3Detected = false;
+////                    page4Detected = false;
+//                }
+
+
+
             }
 
 //            for (AugmentedImage image : augmentedImageCollection) {
@@ -539,14 +577,14 @@ public class ArShowWithAnimation3 extends AppCompatActivity implements
             arFragment.getArSceneView().getScene().removeChild(nodeToremove);
             nodeToremove.getAnchor().detach();
             nodeToremove.setParent(null);
-            nodeToremove = null;
+//            nodeToremove = null;
             Toast.makeText(getApplicationContext(), "Test Delete - anchorNode removed", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "Test Delete - markAnchorNode was null", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void RemoveModels(WeakReference<ArShowWithAnimation3> weakActivity,AugmentedImage image){
+    private void RemoveModels(){
         List<Node> children = new ArrayList<>(arFragment.getArSceneView().getScene().getChildren());
         for (Node node : children) {
             if (node instanceof AnchorNode) {
@@ -578,8 +616,9 @@ public class ArShowWithAnimation3 extends AppCompatActivity implements
 
                         // Setting anchor to the center of AR tag
                         anchorNode = new AnchorNode(image.createAnchor(image.getCenterPose()));
+                        anchorNode.setParent(arFragment.getArSceneView().getScene());
 
-                        arFragment.getArSceneView().getScene().addChild(anchorNode);
+//                        arFragment.getArSceneView().getScene().addChild(anchorNode);
 
                         Quaternion rotation = Quaternion.axisAngle(new Vector3(0f, 1f, 0f), 180f);
 
@@ -613,7 +652,6 @@ public class ArShowWithAnimation3 extends AppCompatActivity implements
                         }
 
 
-                        arIsShow = true;
                     }
 
                 })
